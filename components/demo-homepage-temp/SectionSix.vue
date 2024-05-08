@@ -1,18 +1,25 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  container: true,
+  surfaceTheme: 'accent-dark',
+  spanFull: true
+});
+</script>
+
 <template>
-  <section
-    data-surface-theme="accent-dark"
-    class="region @container col-span-full"
-  >
+  <Section v-model:settings="sectionSettings">
     <div class="wrapper-grid @[80ch]:[--start-col:0]">
       <Card
         title="Test card"
         :reverse-order="false"
         :css="{
-          card: 'col-start-2 col-end-2 w-full p-0',
-          title: 'heading-md',
+          card: ['col-start-2', 'col-end-2', 'w-full', 'p-0'],
+          title: ['heading-md'],
         }"
         :align-items="{
-          column: 'center'
+          column: 'center',
         }"
       >
         <template #picture>
@@ -35,5 +42,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

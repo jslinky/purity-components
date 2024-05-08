@@ -1,5 +1,5 @@
 <template>
-  <section class="region @container">
+  <Section>
     <div class="wrapper-grid">
       <Card
         title="Test card"
@@ -74,5 +74,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

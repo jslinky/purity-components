@@ -1,5 +1,14 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  surfaceTheme: 'primary',
+  spanFull: true
+});
+</script>
+
 <template>
-  <section class="region @container col-span-full" data-surface-theme="primary">
+  <Section v-model:settings="sectionSettings">
     <div class="wrapper-grid">
       <Card
         :css="{
@@ -35,5 +44,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

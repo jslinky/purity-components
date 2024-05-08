@@ -1,20 +1,21 @@
-
 export type SvgProp = {
   el: string | typeof import("vue");
-}
+};
 
 export type PartnerLogos = {
   item?: {
-      css: string;
+    css: string;
   };
   svg?: Pick<SvgProp, "el">;
   link?: {
-      url: string;
-      title?: string;
+    url: string;
+    title?: string;
   };
 };
 
-export type GlobalFontConfigPropNames = "font-family-base" | "heading-font-family";
+export type GlobalFontConfigPropNames =
+  | "font-family-base"
+  | "heading-font-family";
 
 export type FontSettings<T extends string> = {
   fonts: {
@@ -73,17 +74,16 @@ export type ValueUnitSettings<T extends string> = {
 
 export type SizeProps = ValueUnitSettings<SizeConfigKeys>;
 
-
-export type ColorConfigKeys = 
-"primary-h" 
-| "primary-c" 
-| "primary-l"
-| "secondary-h"
-| "secondary-c"
-| "secondary-l"
-| "accent-h"
-| "accent-c"
-| "accent-l";
+export type ColorConfigKeys =
+  | "primary-h"
+  | "primary-c"
+  | "primary-l"
+  | "secondary-h"
+  | "secondary-c"
+  | "secondary-l"
+  | "accent-h"
+  | "accent-c"
+  | "accent-l";
 
 export type ColorProps = ValueUnitSettings<ColorConfigKeys>;
 
@@ -92,4 +92,33 @@ export type ColorNames = PropName<ColorConfigKeys>;
 export type SitePropSettings = GlobalFontProps & {
   size: SizeProps;
   color: ColorProps;
+};
+
+export type ComponentVariationsObj<ComponentVariationNames> = {
+  name: ComponentVariationNames;
+  component: ReturnType<typeof defineAsyncComponent>;
+};
+
+export type SurfaceThemeTypes =
+  | "light"
+  | "eggshell"
+  | "dark"
+  | "primary"
+  | "primary-light"
+  | "primary-dark"
+  | "secondary"
+  | "secondary-light"
+  | "secondary-dark"
+  | "accent"
+  | "accent-light"
+  | "accent-dark";
+
+export type SurfaceThemeSetting = {
+  surfaceTheme?: SurfaceThemeTypes | undefined;
+};
+
+export type SectionComponentSettings = SurfaceThemeSetting & {
+  id?: string;
+  container?: boolean;
+  spanFull?: boolean;
 };

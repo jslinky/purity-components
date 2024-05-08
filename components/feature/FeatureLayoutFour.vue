@@ -1,5 +1,5 @@
 <template>
-  <section class="region @container">
+  <Section>
     <div class="wrapper-grid">
       <Card
         title="Test card"
@@ -10,7 +10,7 @@
         }"
         :picture="{
           ratio: {
-            column: 'sqaure',
+            column: 'square',
             row: 'square',
           },
         }"
@@ -36,8 +36,10 @@
             viverra ornare, eros dolor interdum nulla, ut commodo diam libero
             vitae erat.
           </p>
-          <div class="layout layout-grid w-full [--layout-column-min:10ch] [--column-count:2]">
-            <div v-for="card in Array.from({length:2})">
+          <div
+            class="layout layout-grid w-full [--layout-column-min:10ch] [--column-count:2]"
+          >
+            <div v-for="card in Array.from({ length: 2 })">
               <Card
                 :css="{
                   card: 'flex',
@@ -65,12 +67,12 @@
                 </template>
               </Card>
             </div>
-          </div>          
+          </div>
         </template>
         <template #footer>
           <button class="btn btn-primary btn-outline">Buy Now</button>
         </template>
       </Card>
     </div>
-  </section>  
+  </Section>
 </template>

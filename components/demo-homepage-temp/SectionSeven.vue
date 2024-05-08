@@ -1,8 +1,15 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  container: true,
+  surfaceTheme: 'secondary-dark',
+  spanFull: true
+});
+</script>
+
 <template>
-  <section
-    data-surface-theme="secondary-dark"
-    class="region @container col-span-full"
-  >
+  <Section v-model:settings="sectionSettings">
     <div class="wrapper-grid @[80ch]:[--end-col:0]">
       <Card
         title="Test card"
@@ -12,12 +19,12 @@
           title: 'heading-md',
         }"
         :align-items="{
-          column: 'center'
+          column: 'center',
         }"
         :picture="{
           ratio: {
-            column: 'widescreen'
-          }
+            column: 'widescreen',
+          },
         }"
       >
         <template #picture>
@@ -26,7 +33,7 @@
             alt="user header"
             class="w-full"
             src="https://picsum.photos/1600/900"
-          />          
+          />
         </template>
         <template #default>
           <p class="text-xl">
@@ -41,5 +48,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

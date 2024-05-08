@@ -1,6 +1,28 @@
+<script setup lang="ts">
+
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({});
+
+const tabs = ref([
+  {
+    title: "This is a title",
+    content: "This is some content",
+  },
+  {
+    title: "This is a title",
+    content: "This is some content",
+  },
+  {
+    title: "This is a title",
+    content: "This is some content",
+  },
+]);
+</script>
+
 <template>
-  <section class="region @container">
-    <div class="wrapper-grid">
+  <Section v-model:settings="sectionSettings">
+    <div class="wrapper-grid" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
         title="Test card"
         :reverse-order="false"
@@ -44,23 +66,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>
-
-<script setup lang="ts">
-
-const tabs = ref([
-  {
-    title: "This is a title",
-    content: "This is some content",
-  },
-  {
-    title: "This is a title",
-    content: "This is some content",
-  },
-  {
-    title: "This is a title",
-    content: "This is some content",
-  },
-]);
-</script>

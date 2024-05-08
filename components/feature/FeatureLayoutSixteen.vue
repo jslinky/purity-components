@@ -1,7 +1,5 @@
-
-
 <template>
-  <section class="region @container">
+  <Section>
     <div class="wrapper-grid">
       <Card
         title="Test card"
@@ -42,9 +40,9 @@
             class="layout layout-grid w-full [--layout-column-min:10ch] [--column-count:2]"
           >
             <ul>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>  
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>  
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>  
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
             </ul>
           </div>
         </template>
@@ -53,5 +51,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

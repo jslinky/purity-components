@@ -1,5 +1,13 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  container: false,
+});
+</script>
+
 <template>
-  <section class="region">
+  <Section v-model:settings="sectionSettings">
     <div class="layout layout-grid [--layout-column-min:8ch]">
       <div>
         <div class="card border aspect-square">
@@ -30,5 +38,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </Section>
 </template>

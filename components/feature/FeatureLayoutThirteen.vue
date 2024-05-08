@@ -1,26 +1,25 @@
 <script setup lang="ts">
-import type { PartnerLogos } from "../../types"
+import type { PartnerLogos } from "../../types";
 
 type ComponentProps = {
-    logos?: PartnerLogos[];
+  logos?: PartnerLogos[];
 };
 
-const logoArr: Ref<PartnerLogos[]> = ref([])
+const logoArr: Ref<PartnerLogos[]> = ref([]);
 
 const { data, pending, error } = await useFetch("/api/mock/default", {
   pick: ["logos"],
 });
 if (data) {
   const { logos } = data.value as ComponentProps;
-  if(logos) {
+  if (logos) {
     logoArr.value = logos.slice(0, 4) as PartnerLogos[];
   }
 }
-
 </script>
 
 <template>
-  <section class="region @container">
+  <Section>
     <div class="wrapper-grid">
       <Card
         title="Test card"
@@ -68,5 +67,5 @@ if (data) {
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

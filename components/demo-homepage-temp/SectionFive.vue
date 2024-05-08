@@ -1,6 +1,14 @@
+
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  container: false
+});
+</script>
 <template>
-  <section class="region">
-    <div class="@container">
+  <Section v-model:settings="sectionSettings">
+    <div class="@container" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
         :reverse-order="true"
         data-surface-theme="primary-light"
@@ -10,7 +18,7 @@
             'quote justify-center order-2 @[80ch]:order-0 pb-card-component @[80ch]:py-md',
         }"
         :align-items="{
-          column: 'center'
+          column: 'center',
         }"
       >
         <template #default>
@@ -44,5 +52,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

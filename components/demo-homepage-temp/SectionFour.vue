@@ -1,6 +1,14 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  container: false
+});
+</script>
+
 <template>
-  <section class="region">
-    <div class="@container">
+  <Section v-model:settings="sectionSettings">
+    <div class="@container" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
         :reverse-order="true"
         :css="{
@@ -21,5 +29,5 @@
         </template>
       </Card>
     </div>
-  </section>
+  </Section>
 </template>

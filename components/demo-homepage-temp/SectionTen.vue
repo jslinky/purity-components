@@ -1,6 +1,14 @@
+<script setup lang="ts">
+
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({});
+
+</script>
+
 <template>
-  <section class="region @container">
-    <div class="wrapper-grid">
+  <Section v-model:settings="sectionSettings">
+    <div class="wrapper-grid" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
         title="Test card"
         :reverse-order="true"
@@ -11,8 +19,8 @@
           },
         }"
         :align-items="{
-          column: 'center'
-        }"        
+          column: 'center',
+        }"
         :css="{
           card: 'col-span-full w-full p-0',
           title: 'heading-md',
@@ -24,7 +32,7 @@
             alt="user header"
             class="w-full"
             src="https://picsum.photos/800/600"
-          />             
+          />
         </template>
         <template #default>
           <p class="text-xl">
@@ -39,6 +47,5 @@
         </template>
       </Card>
     </div>
-  </section>
-
+  </Section>
 </template>

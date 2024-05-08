@@ -1,6 +1,15 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  surfaceTheme: 'eggshell',
+  spanFull: true
+});
+</script>
 <template>
-  <section
-    class="region [--color-surface-bg:var(--color-eggshell)] col-span-full flow"
+  <Section 
+    v-model:settings="sectionSettings"
+    class="flow"
   >
     <div class="flex justify-between items-center wrapper mt-gutter">
       <h2 class="heading-sm">This is a section heading</h2>
@@ -81,5 +90,5 @@
         </Card>
       </div>
     </div>
-  </section>
+  </Section>
 </template>

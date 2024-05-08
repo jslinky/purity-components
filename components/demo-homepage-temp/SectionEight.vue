@@ -1,18 +1,24 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({});
+</script>
+
 <template>
-  <section class="region @container">
+  <Section v-model:settings="sectionSettings">
     <div class="wrapper-grid">
       <Card
         title="Test card"
         :reverse-order="false"
         :align-items="{
-          column: 'center'
+          column: 'center',
         }"
         :picture="{
           ratio: {
             column: 'landscape',
             row: 'square',
           },
-        }"        
+        }"
         :css="{
           card: 'col-span-full w-full p-0',
           title: 'heading-md',
@@ -34,7 +40,5 @@
         </template>
       </Card>
     </div>
-  </section>
-
+  </Section>
 </template>
-

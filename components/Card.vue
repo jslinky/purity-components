@@ -17,7 +17,8 @@ type ComponentPictureRatio =
   | "portrait"
   | "widescreen"
   | "ultrawide"
-  | "golden";
+  | "golden"
+  | "auto";
 
 type ComponentPicture = {
   src?: string;

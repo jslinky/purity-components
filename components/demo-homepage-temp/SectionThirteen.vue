@@ -1,9 +1,20 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({
+  surfaceTheme: 'eggshell',
+  spanFull: true,
+  container: false,
+});
+</script>
+
 <template>
-  <section
-    class="region [--color-surface-bg:var(--color-eggshell)] col-span-full flow"
+  <Section
+    v-model:settings="sectionSettings"
+    class="flow"
   >
     <div class="wrapper layout layout-grid">
-      <template v-for="card in Array.from({ length: 4 })">
+      <template v-for="(card, index) in Array.from({ length: 4 })" :key="index">
         <div>
           <!-- Add image-full as a prop -->
           <Card
@@ -24,5 +35,5 @@
         </div>
       </template>
     </div>
-  </section>
+  </Section>
 </template>

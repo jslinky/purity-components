@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import type { SectionComponentSettings } from "../../types";
+
+const sectionSettings: SectionComponentSettings = reactive({});
+</script>
+
 <template>
-  <section class="region @container">
-    <div class="wrapper-grid flow">
-      <template v-for="card in Array.from({ length: 4 })">
+  <Section v-model:settings="sectionSettings">
+    <div class="wrapper-grid flow" :class="{'wrapper': sectionSettings.spanFull}">
+      <template v-for="(card, index) in Array.from({ length: 4 })" :key="index">
         <Card
           title="Test card"
           :reverse-order="false"
@@ -30,5 +36,5 @@
         </Card>
       </template>
     </div>
-  </section>
+  </Section>
 </template>
