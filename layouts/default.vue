@@ -32,6 +32,25 @@ const uiSettings = useState("ui-settings", () => false);
 const settings: globalThis.Ref<SitePropSettings> = useSiteSettings();
 const propsLoaded = ref(false)
 
+const { $prismic } = useNuxtApp();
+
+if ($prismic) {
+  const { asImageSrc } = usePrismic()
+  const siteSettings = useSettings()
+  if(siteSettings) {
+    useSeoMeta({
+      title: siteSettings.value?.data?.site_title,
+      description: siteSettings.value?.data?.meta_description,
+      ogImage: asImageSrc(siteSettings.value?.data?.og_image),
+
+    })
+  }
+} else {
+  // The composable does not exist in the app
+  // Handle the case accordingly
+}
+
+
 const getPropValues = () => {
 
   Object.entries(globalFontProps.fonts).forEach(([key, value]) => {
