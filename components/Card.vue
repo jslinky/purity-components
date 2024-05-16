@@ -32,6 +32,7 @@ type ComponentPicture = {
 };
 
 type ComponentAlignItemsOption = "start" | "center" | "end";
+type ComponentJustifyContentOption = ComponentAlignItemsOption;
 
 type ComponentPropsStyles = Partial<ComponentStyles>;
 
@@ -48,6 +49,14 @@ type ComponentProps = {
     column?: ComponentAlignItemsOption;
     row?: ComponentAlignItemsOption;
   };
+  justifyContent?: {
+    column?: ComponentJustifyContentOption;
+    row?: ComponentJustifyContentOption;
+  };
+  textAlign?: {
+    column?: "left" | "center" | "right";
+    row?: "left" | "center" | "right";
+  }
   css?: ComponentPropsStyles;
 };
 
@@ -61,32 +70,11 @@ const {
   interact = false,
   noClip,
   alignItems,
-  css,
+  justifyContent,
+  textAlign,
+  css
 } = defineProps<ComponentProps>();
 
-const alignItemsClass = (val: string) => {
-  switch (val) {
-    case "start":
-      return "items-start";
-      break;
-    case "center":
-      return "items-center";
-      break;
-    case "end":
-      return "items-end";
-      break;
-    default:
-      return "";
-      break;
-  }
-};
-
-const alignItemsColumn = computed(() =>
-  alignItems?.column ? alignItemsClass(alignItems.column) : ""
-);
-const alignItemsRow = computed(() =>
-  alignItems?.row ? alignItemsClass(alignItems.row) : ""
-);
 
 const {
   card: cardStyles,
@@ -103,8 +91,6 @@ const {
     [
       "card",
       isStacked ? "card--stacked" : "",
-      alignItemsColumn.value,
-      alignItemsRow.value,
     ],
     css?.card
   ),
@@ -178,6 +164,12 @@ const renderBody = () => {
     :class="cardStyles"
     :data-surface-interact="interact"
     :data-card-clip="noClip ? false : true"
+    :data-card-column-align="alignItems?.column"
+    :data-card-row-align="alignItems?.row"
+    :data-card-column-justify="justifyContent?.column"
+    :data-card-row-justify="justifyContent?.row"
+    :data-card-column-text-align="textAlign?.column"
+    :data-card-row-text-align="textAlign?.row"
   >
     <template v-if="!reverseOrder">
       <component v-if="slots.picture || picture" :is="renderPicture" />

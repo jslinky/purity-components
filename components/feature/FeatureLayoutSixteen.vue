@@ -10,7 +10,7 @@
         }"
         :picture="{
           ratio: {
-            column: 'sqaure',
+            column: 'square',
             row: 'square',
           },
         }"

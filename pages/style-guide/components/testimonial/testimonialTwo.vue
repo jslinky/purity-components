@@ -1,0 +1,3 @@
+<template>
+    <TestimonialTwo />
+</template>

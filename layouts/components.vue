@@ -24,7 +24,7 @@
       <summary>Testimonial</summary>
       <div class="flex flex-col">
         <NuxtLink to="/style-guide/components/testimonial/testimonialOne">Testimonial One</NuxtLink>
-        <NuxtLink to="/style-guide/components/testimonial/testimonialFour">Testimonial Four</NuxtLink>
+        <NuxtLink to="/style-guide/components/testimonial/testimonialTwo">Testimonial Two</NuxtLink>
       </div>
     </details>        
   </aside>

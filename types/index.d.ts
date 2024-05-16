@@ -122,3 +122,6 @@ export type SectionComponentSettings = SurfaceThemeSetting & {
   container?: boolean;
   spanFull?: boolean;
 };
+
+///// Updated for prismic
+
