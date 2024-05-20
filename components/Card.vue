@@ -42,9 +42,10 @@ type ComponentProps = {
   tagline?: string;
   subtitle?: string;
   isStacked?: boolean;
+  isColumnLayout?: boolean;
   reverseOrder?: boolean;
   interact?: boolean;
-  noClip?: boolean;
+  clip?: boolean;
   alignItems?: {
     column?: ComponentAlignItemsOption;
     row?: ComponentAlignItemsOption;
@@ -67,8 +68,9 @@ const {
   subtitle,
   isStacked = false,
   reverseOrder = false,
+  isColumnLayout = false,  
   interact = false,
-  noClip,
+  clip: noClip,
   alignItems,
   justifyContent,
   textAlign,
@@ -91,6 +93,7 @@ const {
     [
       "card",
       isStacked ? "card--stacked" : "",
+      isColumnLayout ? "card--side" : "",
     ],
     css?.card
   ),
@@ -163,7 +166,7 @@ const renderBody = () => {
   <article
     :class="cardStyles"
     :data-surface-interact="interact"
-    :data-card-clip="noClip ? false : true"
+    :data-card-clip="clip ?? true"
     :data-card-column-align="alignItems?.column"
     :data-card-row-align="alignItems?.row"
     :data-card-column-justify="justifyContent?.column"

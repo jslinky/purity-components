@@ -10,9 +10,7 @@ type ComponentProps = {
 };
 
 const logoArr: Ref<PartnerLogos[]> = ref([]);
-const value = ref(
-  slice?.primary?.rating ? parseInt(slice?.primary?.rating) : 3
-);
+const defaultRatingValue = ref(3);
 
 const { data, pending, error } = await useFetch("/api/mock/default", {
   pick: ["logos"],
@@ -26,9 +24,32 @@ if (data) {
 </script>
 
 <template>
-  <section class="region @container text-center flow">
-    <slot name="testimonials-heading" />
-    <slot name="testimonials-intro" />
+  <section
+    class="region @container text-center flow"
+    :class="{
+      'col-span-full': slice?.primary?.expand_to_full_width ?? false,
+      'col-start-2 col-end-2': !slice?.primary?.expand_to_full_width ?? true,
+    }"
+    :data-surface-theme="slice.primary.surface_background"
+  >
+    <slot name="testimonials-heading">
+      <PrismicRichText
+        v-if="slice?.primary?.heading"
+        :field="slice?.primary?.heading"
+        class="heading-md"
+      />
+      <h2 v-else class="heading-md">Customer testimonials</h2>
+    </slot>
+    <slot name="testimonials-intro">
+      <PrismicRichText
+        v-if="slice?.primary?.intro"
+        :field="slice?.primary?.intro"
+        class="text-lg"
+      />
+      <p v-else class="text-lg">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+    </slot>
     <slot name="testimonials-content">
       <div
         class="layout-grid [--column-count:3] [--flow-space:var(--spacing-2xl)] place-items-center"
@@ -50,21 +71,25 @@ if (data) {
             }"
             :css="{
               title: 'heading-md',
-              picture: 'quote order-2',
+              picture: {
+                'quote order-2': true,
+                'flex-col':
+                  slice?.primary?.stacked_layout_user_profile ?? false,
+              },
               content: 'mt-0',
             }"
           >
-            <!-- https://github.com/nuxt/image/issues/309 -->
             <template #picture>
               <UserProfile
                 :testimonial="item?.testimonial"
+                :stacked="slice?.primary?.stacked_layout_user_profile ?? false"
                 :css="{
                   figure: 'w-auto',
                 }"
               />
               <div
                 v-if="item?.testimonial?.data?.company_logo"
-                class="*:w-full *:h-full aspect-[16/3] w-48 self-center"
+                class="*w-full *radius-none flex justify-center w-28 self-center"
               >
                 <PrismicImage :field="item?.testimonial?.data?.company_logo" />
               </div>
@@ -77,7 +102,28 @@ if (data) {
             <template #default>
               <div class="flow">
                 <Rating
-                  v-model="value"
+                  v-if="item?.testimonial?.data?.rating"
+                  v-model="item.testimonial.data.rating"
+                  readonly
+                  :cancel="false"
+                  :class="{
+                    'justify-start':
+                      (slice?.primary?.justify_rating &&
+                        slice?.primary?.justify_rating === 'start') ??
+                      false,
+                    'justify-center':
+                      (slice?.primary?.justify_rating &&
+                        slice?.primary?.justify_rating === 'center') ??
+                      true,
+                    'justify-end':
+                      (slice?.primary?.justify_rating &&
+                        slice?.primary?.justify_rating === 'end') ??
+                      false,
+                  }"
+                />
+                <Rating
+                  v-else
+                  v-model="defaultRatingValue"
                   readonly
                   :cancel="false"
                   class="justify-center"
@@ -87,7 +133,21 @@ if (data) {
                   v-if="item?.testimonial?.data?.quote"
                   wrapper="q"
                   :field="item?.testimonial?.data?.quote"
-                  class="text-lg block text-center"
+                  class="text-lg block"
+                  :class="{
+                    'text-left':
+                      (slice?.primary?.justify_quote &&
+                        slice?.primary?.justify_quote === 'start') ??
+                      false,
+                    'text-center':
+                      (slice?.primary?.justify_quote &&
+                        slice?.primary?.justify_quote === 'center') ??
+                      true,
+                    'text-right':
+                      (slice?.primary?.justify_quote &&
+                        slice?.primary?.justify_quote === 'end') ??
+                      false,
+                  }"                  
                 />
                 <q v-else class="text-lg block text-center">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
