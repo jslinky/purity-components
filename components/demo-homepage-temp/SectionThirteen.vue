@@ -18,7 +18,7 @@ const sectionSettings: SectionComponentSettings = reactive({
         <div>
           <!-- Add image-full as a prop -->
           <Card
-            data-surface-theme="light"
+            surface-theme="light"
             :css="{
               card: 'image-full',
               picture: '[--card-aspect:9/16]',

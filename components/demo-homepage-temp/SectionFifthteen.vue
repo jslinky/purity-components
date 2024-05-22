@@ -10,7 +10,7 @@ const sectionSettings: SectionComponentSettings = reactive({});
       <template v-for="(card, index) in Array.from({ length: 4 })" :key="index">
         <Card
           title="Test card"
-          :reverse-order="false"
+          :reverse-source-order="false"
           :css="{
             card: 'col-span-full w-full p-0 [--card-left-col:fit-content(clamp(150px,30vw,300px))] [--card-right-col:1fr]',
           }"

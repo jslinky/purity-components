@@ -25,7 +25,7 @@ const tabs = ref([
     <div class="wrapper-grid" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
         title="Test card"
-        :reverse-order="false"
+        :reverse-source-order="false"
         :align-items="{
           column: 'center',
         }"

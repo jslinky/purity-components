@@ -2,7 +2,7 @@
   <Section>
     <div class="wrapper-grid">
       <Card
-        :reverse-order="!slice?.primary?.reverse_column_layout ?? false"
+        :reverse-source-order="!slice?.primary?.reverse_column_layout ?? false"
         :is-stacked="slice.primary.staked_layout ?? false"
         :align-items="{
           column: 'center',

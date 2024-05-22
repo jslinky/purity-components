@@ -9,7 +9,7 @@ const sectionSettings: SectionComponentSettings = reactive({});
     <div class="wrapper-grid" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
         title="Test card"
-        :reverse-order="true"
+        :reverse-source-order="true"
         :is-stacked="true"
         :css="{
           card: 'col-span-full w-full p-0',

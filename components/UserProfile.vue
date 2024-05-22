@@ -79,12 +79,13 @@ const {
 </script>
 
 <template>
-  <p class="absolute bg-primary z-50">{{ stacked }}</p>
+  <!-- <p class="absolute bg-primary z-50">{{ testimonial }}</p> -->
   <figure :class="figureStyles">
     <div :class="imageWrapperStyles">
       <slot name="image">
         <template v-if="testimonial">
           <PrismicImage
+            v-if="testimonial?.data?.avatar"
             :field="testimonial?.data?.avatar"
             :class="imageStyles"
           />

@@ -17,7 +17,7 @@ const sectionSettings: SectionComponentSettings = reactive({})
       >
         <div class="@[980px]:col-span-4">
           <Card
-            data-surface-theme="primary-light"
+            surface-theme="primary-light"
             :interact="true"
             title="Advanced Card"
             subtitle="Card subtitle"
@@ -37,7 +37,7 @@ const sectionSettings: SectionComponentSettings = reactive({})
         </div>
         <div class="@[980px]:col-span-2">
           <Card
-            data-surface-theme="primary"
+            surface-theme="primary"
             :interact="true"
             title="Advanced Card"
             subtitle="Card subtitle"
@@ -57,7 +57,7 @@ const sectionSettings: SectionComponentSettings = reactive({})
         </div>
         <div class="@[980px]:col-span-3">
           <Card
-            data-surface-theme="primary-light"
+            surface-theme="primary-light"
             :interact="true"
             title="Advanced Card"
             subtitle="Card subtitle"
@@ -77,7 +77,7 @@ const sectionSettings: SectionComponentSettings = reactive({})
         </div>
         <div class="@[980px]:col-span-3">
           <Card
-            data-surface-theme="primary-light"
+            surface-theme="primary-light"
             :interact="true"
             title="Advanced Card"
             subtitle="Card subtitle"
@@ -97,7 +97,7 @@ const sectionSettings: SectionComponentSettings = reactive({})
         </div>
         <div class="@[980px]:col-span-2">
           <Card
-            data-surface-theme="primary"
+            surface-theme="primary"
             :interact="true"
             title="Advanced Card"
             subtitle="Card subtitle"
@@ -117,7 +117,7 @@ const sectionSettings: SectionComponentSettings = reactive({})
         </div>
         <div class="@[980px]:col-span-4">
           <Card
-            data-surface-theme="dark"
+            surface-theme="dark"
             :interact="true"
             title="Advanced Card"
             subtitle="Card subtitle"

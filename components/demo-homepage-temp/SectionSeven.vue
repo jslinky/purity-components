@@ -13,7 +13,7 @@ const sectionSettings: SectionComponentSettings = reactive({
     <div class="wrapper-grid @[80ch]:[--end-col:0]">
       <Card
         title="Test card"
-        :reverse-order="true"
+        :reverse-source-order="true"
         :css="{
           card: 'col-start-2 col-end-2 w-full p-0',
           title: 'heading-md',

@@ -22,7 +22,7 @@ const sectionSettings: SectionComponentSettings = reactive({
       class="wrapper layout layout-grid [--color-surface-bg:var(--color-light)]"
     >
       <div>
-        <Card data-surface-theme="light" title="Test card">
+        <Card surface-theme="light" title="Test card">
           <template #picture>
             <img
               alt="user header"
@@ -44,7 +44,7 @@ const sectionSettings: SectionComponentSettings = reactive({
         </Card>
       </div>
       <div>
-        <Card data-surface-theme="light" title="Test card">
+        <Card surface-theme="light" title="Test card">
           <template #picture>
             <img
               alt="user header"
@@ -66,7 +66,7 @@ const sectionSettings: SectionComponentSettings = reactive({
         </Card>
       </div>
       <div>
-        <Card data-surface-theme="light" title="Test card">
+        <Card surface-theme="light" title="Test card">
           <template #picture>
             <img
               alt="user header"

@@ -24,7 +24,7 @@ if (data) {
       <Card
         title="Test card"
         tagline="Tagline"
-        :reverse-order="true"
+        :reverse-source-order="true"
         :align-items="{
           column: 'center',
         }"

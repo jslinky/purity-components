@@ -10,7 +10,7 @@ const sectionSettings: SectionComponentSettings = reactive({
   <Section v-model:settings="sectionSettings">
     <div class="@container" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
-        :reverse-order="true"
+        :reverse-source-order="true"
         :css="{
           card: '[--card-left-col:1fr] [--card-right-col:auto]',
           title: 'heading-lg',

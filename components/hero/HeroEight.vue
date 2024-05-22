@@ -7,7 +7,7 @@
         >
           <Card
             title="We build your digital future"
-            :reverse-order="true"
+            :reverse-source-order="true"
             :css="{
                 title: 'heading-xl',
                 card: '[--card-left-col:1fr] [--card-right-col:1fr]',

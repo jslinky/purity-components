@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 const { slice } = defineProps<{
-  slice: PrismicSlice;
+  slice?: PrismicSlice;
 }>();
 
 </script>
@@ -10,7 +10,7 @@ const { slice } = defineProps<{
   <Section>
     <div class="wrapper-grid">
       <Card
-        :reverse-order="!slice?.primary?.reverse_column_layout ?? false"
+        :reverse-source-order="!slice?.primary?.reverse_column_layout ?? false"
         :is-stacked="slice?.primary?.stacked_layout ?? false"
         :align-items="{
           column: slice?.primary?.align_column_body_content ?? 'center',

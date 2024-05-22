@@ -43,9 +43,24 @@ type ComponentProps = {
   subtitle?: string;
   isStacked?: boolean;
   isColumnLayout?: boolean;
-  reverseOrder?: boolean;
+  reverseSourceOrder?: boolean;
+  reverseOrder?: {
+    column?: boolean;
+    row?: boolean;
+  };
+  overlayImage?: boolean;
+  overlayBackdrop?: boolean;
+  overlayBackdropDirection?: {
+    column?: CardDocumentData["content_overlay_backdrop_dir_column"];
+    row?: CardDocumentData["content_overlay_backdrop_dir_row"];
+  }
   interact?: boolean;
   clip?: boolean;
+  surfaceTheme?: string;
+  imageMask?: {
+    column?: CardDocumentData["image_mask"];
+    row?: CardDocumentData["image_mask"];
+  };
   alignItems?: {
     column?: ComponentAlignItemsOption;
     row?: ComponentAlignItemsOption;
@@ -57,7 +72,7 @@ type ComponentProps = {
   textAlign?: {
     column?: "left" | "center" | "right";
     row?: "left" | "center" | "right";
-  }
+  };
   css?: ComponentPropsStyles;
 };
 
@@ -67,16 +82,21 @@ const {
   tagline,
   subtitle,
   isStacked = false,
-  reverseOrder = false,
-  isColumnLayout = false,  
+  reverseSourceOrder = false,
+  isColumnLayout = false,
   interact = false,
-  clip: noClip,
+  reverseOrder,
+  overlayImage = false,
+  overlayBackdrop = false,
+  overlayBackdropDirection,
+  clip,
+  surfaceTheme,
+  imageMask,
   alignItems,
   justifyContent,
   textAlign,
-  css
+  css,
 } = defineProps<ComponentProps>();
-
 
 const {
   card: cardStyles,
@@ -116,6 +136,8 @@ const renderPicture = () => {
       class: pictureStyles,
       "data-card-picture-aspect-column": picture?.ratio?.column || null,
       "data-card-picture-aspect-row": picture?.ratio?.row || null,
+      "data-card-picture-mask-column": imageMask?.column ? (imageMask?.column !== 'none' ? imageMask?.column : null) : null,
+      "data-card-picture-mask-row": imageMask?.row ? (imageMask?.row !== 'none' ? imageMask?.row : null) : null,
     },
     [
       // Render slot 'picture' or the <img> tag if 'picture' prop is provided
@@ -165,6 +187,7 @@ const renderBody = () => {
 <template>
   <article
     :class="cardStyles"
+    :data-surface-theme="surfaceTheme"
     :data-surface-interact="interact"
     :data-card-clip="clip ?? true"
     :data-card-column-align="alignItems?.column"
@@ -173,14 +196,40 @@ const renderBody = () => {
     :data-card-row-justify="justifyContent?.row"
     :data-card-column-text-align="textAlign?.column"
     :data-card-row-text-align="textAlign?.row"
+    :data-card-reverse-order-column="reverseOrder?.column"
+    :data-card-reverse-order-row="reverseOrder?.row"
+    :data-card-overlay-image="overlayImage ? 'true' : null"
+    :data-card-overlay-backdrop="overlayBackdrop ? 'true' : null"
+    :data-card-overlay-backdrop-direction-column="overlayBackdropDirection?.column ?? null"
+    :data-card-overlay-backdrop-direction-row="overlayBackdropDirection?.row ?? null"
   >
-    <template v-if="!reverseOrder">
-      <component v-if="slots.picture || picture" :is="renderPicture" />
-      <component v-if="slots.caption || slots.default || slots.footer || tagline || subtitle || title" :is="renderBody" />
+    <template v-if="!reverseSourceOrder">
+      <component :is="renderPicture" v-if="slots.picture || picture" />
+      <component
+        :is="renderBody"
+        v-if="
+          slots.caption ||
+          slots.default ||
+          slots.footer ||
+          tagline ||
+          subtitle ||
+          title
+        "
+      />
     </template>
     <template v-else>
-      <component v-if="slots.caption || slots.default || slots.footer || tagline || subtitle || title" :is="renderBody" />
-      <component v-if="slots.picture || picture" :is="renderPicture" />
+      <component
+        :is="renderBody"
+        v-if="
+          slots.caption ||
+          slots.default ||
+          slots.footer ||
+          tagline ||
+          subtitle ||
+          title
+        "
+      />
+      <component :is="renderPicture" v-if="slots.picture || picture" />
     </template>
   </article>
 </template>

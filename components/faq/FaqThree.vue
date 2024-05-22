@@ -24,7 +24,7 @@ const tabs = ref([
         :align-items="{
           column: 'center',
         }"
-        :reverse-order="true"
+        :reverse-source-order="true"
         :css="{
           title: 'heading-md',
           subtitle: 'text-lg',

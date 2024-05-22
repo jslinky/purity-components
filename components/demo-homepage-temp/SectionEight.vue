@@ -9,7 +9,7 @@ const sectionSettings: SectionComponentSettings = reactive({});
     <div class="wrapper-grid">
       <Card
         title="Test card"
-        :reverse-order="false"
+        :reverse-source-order="false"
         :align-items="{
           column: 'center',
         }"

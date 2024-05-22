@@ -10,8 +10,8 @@ const sectionSettings: SectionComponentSettings = reactive({
   <Section v-model:settings="sectionSettings">
     <div class="@container" :class="{'wrapper': sectionSettings.spanFull}">
       <Card
-        :reverse-order="true"
-        data-surface-theme="primary-light"
+        :reverse-source-order="true"
+        surface-theme="primary-light"
         :css="{
           card: '[--card-left-col:0.6fr] [--card-right-col:0.4fr] [--card-gutter-stacked:var(--spacing-gutter-xl)]',
           picture:

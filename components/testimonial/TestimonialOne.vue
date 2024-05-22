@@ -85,7 +85,7 @@ const quoteCSS = computed(() => {
           class="[--flow-space:1em] max-w-2xl w-full"
         >
           <Card
-            :data-surface-theme="item?.surface_background"
+            :surface-theme="item?.surface_background"
             :align-items="{
               column: 'center',
             }"

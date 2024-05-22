@@ -15,7 +15,7 @@ const sectionSettings: SectionComponentSettings = reactive({
           card: 'py-gutter-xl col-start-2 col-end-2 w-full p-0 [--card-left-col:0.5fr] [--card-right-col:0.5fr]',
           title: 'heading-md',
         }"
-        :reverse-order="true"
+        :reverse-source-order="true"
         :interact="false"
         title="Explore resources for inspiration, instruction, and innovation."
       >
@@ -24,7 +24,7 @@ const sectionSettings: SectionComponentSettings = reactive({
             <template v-for="card in Array.from({ length: 4 })">
               <div>
                 <Card
-                  data-surface-theme="light"
+                  surface-theme="light"
                   :is-stacked="true"
                   title="Test"
                   :picture="{
