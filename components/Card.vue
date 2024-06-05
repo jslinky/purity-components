@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-type ComponentStyles = {
+// import Card from "@base/pages/design-system/components/card.vue";
+import type { CardDocumentData } from "@base/prismicio-types";
+import * as prismic from "@prismicio/client";
+const { $prismic } = useNuxtApp();
+
+type CardStyles = {
   card: CssProp;
   caption: CssProp;
   tagline: CssProp;
@@ -11,33 +16,107 @@ type ComponentStyles = {
   footer: CssProp;
 };
 
-type ComponentPictureRatio =
-  | "square"
-  | "landscape"
-  | "portrait"
-  | "widescreen"
-  | "ultrawide"
-  | "golden"
-  | "auto";
+type CardPictureRatio =
+  CardDocumentData["column_image_ratio"] extends prismic.SelectField<infer U>
+    ? U
+    :
+        | "square"
+        | "landscape"
+        | "portrait"
+        | "widescreen"
+        | "ultrawide"
+        | "golden"
+        | "auto";
 
-type ComponentPicture = {
+type CardPicture = {
   src?: string;
   alt?: string;
   css?: CssProp;
-  linkUrl?: string;
+  linkUrl?: CardDocumentData["image_link"] | string;
   ratio?: {
-    column?: ComponentPictureRatio;
-    row?: ComponentPictureRatio;
+    column?: CardPictureRatio;
+    row?: CardPictureRatio;
   };
 };
 
-type ComponentAlignItemsOption = "start" | "center" | "end";
-type ComponentJustifyContentOption = ComponentAlignItemsOption;
+type CardSurfaceTheme =
+  CardDocumentData["surface_background"] extends prismic.SelectField<infer U>
+    ? U
+    :
+        | "light"
+        | "dark"
+        | "eggshell"
+        | "primary"
+        | "primary-light"
+        | "primary-dark"
+        | "secondary"
+        | "secondary-light"
+        | "secondary-dark"
+        | "accent"
+        | "accent-light"
+        | "accent-dark";
 
-type ComponentPropsStyles = Partial<ComponentStyles>;
+type CardImageMask = CardDocumentData["image_mask"] extends prismic.SelectField<
+  infer U
+>
+  ? U
+  :
+      | "linear-to-top"
+      | "linear-to-right"
+      | "linear-to-bottom"
+      | "linear-to-left"
+      | "none";
 
-type ComponentProps = {
-  picture?: ComponentPicture;
+type CardOverlayBackdropDirection =
+  CardDocumentData["content_overlay_backdrop_dir_column"] extends prismic.SelectField<
+    infer U
+  >
+    ? U
+    :
+        | "uniform"
+        | "linear-to-top"
+        | "linear-to-right"
+        | "linear-to-bottom"
+        | "linear-to-left";
+("filled");
+
+type CardAlignItemsOption =
+  CardDocumentData["align_column_body_content"] extends prismic.SelectField<
+    infer U
+  >
+    ? U
+    : "start" | "center" | "end";
+
+type CardJustifyContentOption =
+  CardDocumentData["justify_column_body_content"] extends prismic.SelectField<
+    infer U
+  >
+    ? U
+    : "start" | "center" | "end";
+
+type CardTextAlignOption =
+  CardDocumentData["content_column_text_align"] extends prismic.SelectField<
+    infer U
+  >
+    ? U
+    : "start" | "center" | "end";
+
+type CardColumnWidths =
+  CardDocumentData["column_widths"] extends prismic.SelectField<infer U>
+    ? U
+    :
+        | "picture_3-content_9"
+        | "picture_4-content_8"
+        | "picture_5-content_7"
+        | "picture_6-content_6"
+        | "picture_7-content_5"
+        | "picture_8-content_4"
+        | "picture_9-content_3";
+
+type CardPropsStyles = Partial<CardStyles>;
+
+type CardProps = {
+  picture?: CardPicture;
   title?: string;
   tagline?: string;
   subtitle?: string;
@@ -51,29 +130,30 @@ type ComponentProps = {
   overlayImage?: boolean;
   overlayBackdrop?: boolean;
   overlayBackdropDirection?: {
-    column?: CardDocumentData["content_overlay_backdrop_dir_column"];
-    row?: CardDocumentData["content_overlay_backdrop_dir_row"];
-  }
+    column?: CardOverlayBackdropDirection;
+    row?: CardOverlayBackdropDirection;
+  };
   interact?: boolean;
   clip?: boolean;
-  surfaceTheme?: string;
+  surfaceTheme?: CardSurfaceTheme;
   imageMask?: {
-    column?: CardDocumentData["image_mask"];
-    row?: CardDocumentData["image_mask"];
+    column?: CardImageMask;
+    row?: CardImageMask;
   };
   alignItems?: {
-    column?: ComponentAlignItemsOption;
-    row?: ComponentAlignItemsOption;
+    column?: CardAlignItemsOption;
+    row?: CardAlignItemsOption;
   };
   justifyContent?: {
-    column?: ComponentJustifyContentOption;
-    row?: ComponentJustifyContentOption;
+    column?: CardJustifyContentOption;
+    row?: CardJustifyContentOption;
   };
   textAlign?: {
-    column?: "left" | "center" | "right";
-    row?: "left" | "center" | "right";
+    column?: CardTextAlignOption;
+    row?: CardTextAlignOption;
   };
-  css?: ComponentPropsStyles;
+  columnWidths?: CardColumnWidths;
+  css?: CardPropsStyles;
 };
 
 const {
@@ -95,8 +175,9 @@ const {
   alignItems,
   justifyContent,
   textAlign,
+  columnWidths,
   css,
-} = defineProps<ComponentProps>();
+} = defineProps<CardProps>();
 
 const {
   card: cardStyles,
@@ -125,9 +206,32 @@ const {
   body: cn("card-body", css?.body),
   content: cn("card-content", css?.content),
   footer: cn("card-footer", css?.footer),
-}) as ComponentStyles;
+}) as CardStyles;
 
 const slots = useSlots();
+
+const computedColumnWidths = computed(() => {
+  if (columnWidths) {
+    switch (columnWidths) {
+      case "picture_3-content_9":
+        return ["[--card-left-col:0.25fr]", "[--card-right-col:0.75fr]"];
+      case "picture_4-content_8":
+        return ["[--card-left-col:0.33fr]", "[--card-right-col:0.66fr]"];
+      case "picture_5-content_7":
+        return ["[--card-left-col:0.4fr]", "[--card-right-col:0.6fr]"];
+      case "picture_6-content_6":
+        return ["[--card-left-col:0.5fr]", "[--card-right-col:0.5fr]"];
+      case "picture_7-content_5":
+        return ["[--card-left-col:0.58fr]", "[--card-right-col:0.42fr]"];
+      case "picture_8-content_4":
+        return ["[--card-left-col:0.66fr]", "[--card-right-col:0.33fr]"];
+      case "picture_9-content_3":
+        return ["[--card-left-col:0.75fr]", "[--card-right-col:0.25fr]"];        
+      default:
+        break;
+    }
+  }
+});
 
 const renderPicture = () => {
   return h(
@@ -136,8 +240,16 @@ const renderPicture = () => {
       class: pictureStyles,
       "data-card-picture-aspect-column": picture?.ratio?.column || null,
       "data-card-picture-aspect-row": picture?.ratio?.row || null,
-      "data-card-picture-mask-column": imageMask?.column ? (imageMask?.column !== 'none' ? imageMask?.column : null) : null,
-      "data-card-picture-mask-row": imageMask?.row ? (imageMask?.row !== 'none' ? imageMask?.row : null) : null,
+      "data-card-picture-mask-column": imageMask?.column
+        ? imageMask?.column !== "none"
+          ? imageMask?.column
+          : null
+        : null,
+      "data-card-picture-mask-row": imageMask?.row
+        ? imageMask?.row !== "none"
+          ? imageMask?.row
+          : null
+        : null,
     },
     [
       // Render slot 'picture' or the <img> tag if 'picture' prop is provided
@@ -186,7 +298,7 @@ const renderBody = () => {
 
 <template>
   <article
-    :class="cardStyles"
+    :class="[cardStyles, computedColumnWidths]"
     :data-surface-theme="surfaceTheme"
     :data-surface-interact="interact"
     :data-card-clip="clip ?? true"
@@ -200,8 +312,12 @@ const renderBody = () => {
     :data-card-reverse-order-row="reverseOrder?.row"
     :data-card-overlay-image="overlayImage ? 'true' : null"
     :data-card-overlay-backdrop="overlayBackdrop ? 'true' : null"
-    :data-card-overlay-backdrop-direction-column="overlayBackdropDirection?.column ?? null"
-    :data-card-overlay-backdrop-direction-row="overlayBackdropDirection?.row ?? null"
+    :data-card-overlay-backdrop-direction-column="
+      overlayBackdropDirection?.column ?? null
+    "
+    :data-card-overlay-backdrop-direction-row="
+      overlayBackdropDirection?.row ?? null
+    "
   >
     <template v-if="!reverseSourceOrder">
       <component :is="renderPicture" v-if="slots.picture || picture" />

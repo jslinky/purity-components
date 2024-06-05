@@ -1,7 +1,7 @@
 <template>
   <article class="hero-content wrapper-grid [--end-col:0]">
     <div class="hero-content__container flex-layout-grid justify-center col-span-full">
-      <div class="hero-content__text flex-col flow justify-center flex @container-normal basis-[max-content] w-[min(var(--wrapper-width),calc(100%-(var(--wrapper-padding)*2)))] mx-auto">
+      <div class="hero-content__text flex-grow-0 flex-col flow justify-center flex @container-normal basis-[max-content] w-[min(var(--wrapper-width),calc(100%-(var(--wrapper-padding)*2)))] mx-auto">
         <slot name="hero-content-heading">
           <h1 class="heading-xl">We build your digital future</h1>
           </slot>
